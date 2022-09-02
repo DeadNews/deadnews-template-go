@@ -2,47 +2,32 @@ linters:
   # https://golangci-lint.run/usage/linters/
   disable-all: true
   enable:
-    - asciicheck
     - bodyclose
     - depguard
     - dogsled
     - dupl
-    - durationcheck
-    - errname
-    - errorlint
-    - exhaustive
+    - errcheck
     - exportloopref
     - funlen
-    - gci
-    - gocognit
+    - gochecknoinits
     - goconst
     - gocritic
     - gocyclo
-    - godot
     - gofmt
-    - gofumpt
-    - goheader
     - goimports
+    - gomnd
     - goprintffuncname
     - gosec
     - gosimple
     - govet
-    - importas
     - ineffassign
     - lll
-    - makezero
     - misspell
-    - nestif
-    - nilerr
+    - nakedret
     - noctx
     - nolintlint
-    - prealloc
-    - predeclared
-    - revive
     - staticcheck
     - stylecheck
-    - tagliatelle
-    - thelper
     - typecheck
     - unconvert
     - unparam
