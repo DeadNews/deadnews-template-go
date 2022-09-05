@@ -42,9 +42,6 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
 
-      - name: Upload coverage to Codecov
-        if: matrix.os == 'ubuntu-latest' && matrix.go == '1.19'
-
       - name: Run tests
         run: go test -v -race -coverprofile=coverage.out -covermode=atomic ./...
 
