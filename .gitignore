@@ -15,6 +15,7 @@
 # vendor/
 
 # Coverage reports
+coverage.txt
 coverage.out
 
 # vscode

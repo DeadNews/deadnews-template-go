@@ -43,7 +43,7 @@ jobs:
           go-version: ${{ matrix.go }}
 
       - name: Run tests
-        run: go test -v -race -coverprofile=coverage.out -covermode=atomic ./...
+        run: go test -v -race -covermode=atomic -coverprofile='coverage.txt' ./...
 
       - name: Upload coverage to Codecov
         if: matrix.os == 'ubuntu-latest' && matrix.go == '1.19'
