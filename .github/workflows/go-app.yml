@@ -48,3 +48,17 @@ jobs:
       - name: Upload coverage to Codecov
         if: matrix.os == 'ubuntu-latest' && matrix.go == '1.19'
         uses: codecov/codecov-action@v3
+
+  check-dependencies:
+    name: Check dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-go@v3
+
+      - name: Write go.list
+        run: go list -json -m all > go.list
+
+      - name: Nancy
+        uses: sonatype-nexus-community/nancy-github-action@v1
