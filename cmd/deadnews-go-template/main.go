@@ -11,7 +11,6 @@ func GetAnswer() int {
 }
 
 func main() {
-	answer := GetAnswer()
-	fmt.Println(answer)
+	fmt.Println(GetAnswer())
 	// Output: 42
 }

@@ -5,8 +5,8 @@ on:
     branches: [main, dev]
   pull_request:
     branches: [main, dev]
-  release:
-    types: [created]
+    tags:
+      - "v*"
 
 permissions:
   contents: read
@@ -62,7 +62,7 @@ jobs:
 
   goreleaser:
     runs-on: ubuntu-latest
-    # if: startsWith(github.ref, 'refs/tags/')
+    if: startsWith(github.ref, 'refs/tags/')
     needs: [code-quality, run-tests, check-deps]
     steps:
       - uses: actions/checkout@v3
