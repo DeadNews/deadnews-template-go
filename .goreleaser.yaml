@@ -1,2 +1,5 @@
 builds:
   - main: ./cmd/deadnews-go-template/
+
+release:
+  prerelease: auto
