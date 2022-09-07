@@ -7,8 +7,8 @@
         },
     },
     "go.useLanguageServer": true,
+    "go.lintTool": "golangci-lint",
     "gopls": {
         "formatting.gofumpt": true,
     },
-    "go.lintTool": "golangci-lint",
 }
