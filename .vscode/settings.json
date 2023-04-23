@@ -1,14 +1,13 @@
 {
-    // Go //
-    "[go]": {
-        "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": true
-        },
-    },
-    "go.useLanguageServer": true,
-    "go.lintTool": "golangci-lint",
-    "gopls": {
-        "formatting.gofumpt": true,
-    },
+  "[go]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  },
+  "go.useLanguageServer": true,
+  "go.lintTool": "golangci-lint",
+  "gopls": {
+    "formatting.gofumpt": true
+  }
 }

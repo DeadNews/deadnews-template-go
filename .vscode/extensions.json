@@ -1,5 +1,4 @@
 {
-    "recommendations": [
-        "golang.go",
-    ]
+  // List of extensions which should be recommended for users of this workspace.
+  "recommendations": ["golang.go"]
 }
