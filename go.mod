@@ -1,4 +1,4 @@
-module github.com/DeadNews/deadnews-go-template
+module github.com/DeadNews/deadnews-template-go
 
 go 1.20
 
