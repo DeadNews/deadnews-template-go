@@ -25,6 +25,3 @@ coverage.out
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
-
-# Local history for vscode
-.history/
