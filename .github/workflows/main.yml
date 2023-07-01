@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-go@v4
 
       - name: Lint code
-        uses: golangci/golangci-lint-action@5f1fec7010f6ae3b84ea4f7b2129beb8639b564f # v3.5.0
+        uses: golangci/golangci-lint-action@639cd343e1d3b897ff35927a75193d57cfcba299 # v3.6.0
         with:
           version: latest
 
@@ -76,7 +76,7 @@ jobs:
       - uses: actions/setup-go@v4
 
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@f82d6c1c344bcacabba2c841718984797f664a6b # v4.2.0
+        uses: goreleaser/goreleaser-action@336e29918d653399e599bfca99fadc1d7ffbc9f7 # v4.3.0
         with:
           version: latest
           args: release --rm-dist
