@@ -1,5 +1,5 @@
+# https://golangci-lint.run/usage/linters/
 linters:
-  # https://golangci-lint.run/usage/linters/
   disable-all: true
   enable:
     - bodyclose
@@ -12,6 +12,7 @@ linters:
     - goconst
     - gocritic
     - gocyclo
+    - godot
     - gofmt
     - gofumpt
     - goimports
@@ -25,6 +26,7 @@ linters:
     - nakedret
     - noctx
     - nolintlint
+    - predeclared
     - staticcheck
     - stylecheck
     - typecheck
