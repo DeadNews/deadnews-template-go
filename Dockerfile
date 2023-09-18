@@ -7,6 +7,7 @@ RUN go build -o /tmp/deadnews-template-go ./...
 
 # Deploy the application binary into a lean image.
 FROM gcr.io/distroless/static-debian12:latest@sha256:98e138282ba524ff4f5124fec603f82ee2331df4ba981d169b3ded8bcd83ca52 AS final
+LABEL maintainer "DeadNews <aurczpbgr@mozmail.com>"
 
 WORKDIR /
 COPY --from=go-builder /tmp/deadnews-template-go /bin/deadnews-template-go
