@@ -1,3 +1,5 @@
+default: build
+
 run_app:
 	go run cmd/deadnews-template-go/main.go
 

@@ -24,9 +24,6 @@ jobs:
       # This is used to complete the identity challenge
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
-      # To upload sarif files.
-      security-events: write
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -82,19 +79,3 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
-
-      # Analyze vulnerabilities.
-      - name: Run Trivy vulnerability scanner
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: aquasecurity/trivy-action@fbd16365eb88e12433951383f5e99bd901fc618f # v0.12.0
-        with:
-          image-ref: ${{ steps.meta.outputs.tags }}
-          format: "sarif"
-          output: "trivy-results.sarif"
-
-      # Upload report to GitHub code scanning.
-      - name: Upload Trivy scan results to GitHub Security tab
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: "trivy-results.sarif"
