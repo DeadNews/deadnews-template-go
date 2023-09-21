@@ -6,7 +6,7 @@ COPY go.mod go.sum cmd ./
 RUN go build -o /tmp/deadnews-template-go ./...
 
 # Deploy the application binary into a lean image.
-FROM gcr.io/distroless/static-debian12:latest@sha256:98e138282ba524ff4f5124fec603f82ee2331df4ba981d169b3ded8bcd83ca52 AS final
+FROM gcr.io/distroless/static-debian12@sha256:98e138282ba524ff4f5124fec603f82ee2331df4ba981d169b3ded8bcd83ca52 AS runtime
 LABEL maintainer "DeadNews <aurczpbgr@mozmail.com>"
 
 WORKDIR /
