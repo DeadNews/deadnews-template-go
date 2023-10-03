@@ -13,6 +13,6 @@ COPY --from=go-builder /app/dist/deadnews-template-go /usr/local/bin/deadnews-te
 
 USER nonroot:nonroot
 EXPOSE 1271
-HEALTHCHECK --interval=60s --timeout=3s CMD curl --fail http://127.0.0.1:1271/health || exit 1
+HEALTHCHECK NONE
 
 CMD ["deadnews-template-go"]
