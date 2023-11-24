@@ -1,5 +1,5 @@
 # Build the application from source.
-FROM golang:1.21.3-alpine@sha256:926f7f7e1ab8509b4e91d5ec6d5916ebb45155b0c8920291ba9f361d65385806 AS go-builder
+FROM golang:1.21.4-alpine@sha256:110b07af87238fbdc5f1df52b00927cf58ce3de358eeeb1854f10a8b5e5e1411 AS go-builder
 
 WORKDIR /app
 COPY go.mod go.sum cmd ./
