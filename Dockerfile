@@ -1,12 +1,12 @@
 # Build the application from source.
-FROM golang:1.21.4-alpine@sha256:110b07af87238fbdc5f1df52b00927cf58ce3de358eeeb1854f10a8b5e5e1411 AS go-builder
+FROM golang:1.21.5-alpine@sha256:feceecc0e1d73d085040a8844de11a2858ba4a0c58c16a672f1736daecc2a4ff AS go-builder
 
 WORKDIR /app
 COPY go.mod go.sum cmd ./
 RUN go build -o /app/dist/deadnews-template-go ./...
 
 # Deploy the application binary into a lean image.
-FROM gcr.io/distroless/static-debian12:latest@sha256:0c3d36f317d6335831765546ece49b60ad35933250dc14f43f0fd1402450532e AS runtime
+FROM gcr.io/distroless/static-debian12:latest@sha256:4a2c1a51ae5e10ec4758a0f981be3ce5d6ac55445828463fce8dff3a355e0b75 AS runtime
 LABEL maintainer "DeadNews <aurczpbgr@mozmail.com>"
 
 COPY --from=go-builder /app/dist/deadnews-template-go /usr/local/bin/deadnews-template-go
