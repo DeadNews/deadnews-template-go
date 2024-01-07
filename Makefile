@@ -1,12 +1,20 @@
+.PHONY: build test run
+
 default: build
 
-run_app:
+run:
 	go run cmd/deadnews-template-go/main.go
-
-test:
-	go test -v -race -covermode=atomic -coverprofile='coverage.txt' ./...
 
 build:
 	go build -o ./dist/ ./...
 
-.PHONY: test
+pc-install:
+	pre-commit install
+
+checks: pc-run test
+
+test:
+	go test -v -race -covermode=atomic -coverprofile='coverage.txt' ./...
+
+pc-run:
+	pre-commit run -a
