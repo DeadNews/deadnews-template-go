@@ -1,0 +1,8 @@
+version: "3"
+services:
+  web:
+    build: .
+    ports:
+      - 1271:1271
+    environment:
+      PORT: "1271"
