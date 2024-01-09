@@ -1,4 +1,4 @@
-.PHONY: build test run
+.PHONY: all clean test default checks docker
 
 default: build
 
@@ -13,11 +13,11 @@ pc-install:
 
 checks: pc-run test
 
-test:
-	go test -v -race -covermode=atomic -coverprofile='coverage.txt' ./...
-
 pc-run:
 	pre-commit run -a
+
+test:
+	go test -v -race -covermode=atomic -coverprofile='coverage.txt' ./...
 
 docker: compose-up
 
