@@ -21,6 +21,10 @@ dist/
 coverage.txt
 coverage.out
 
+# Environments
+.env
+.env.dev
+
 # vscode
 .vscode/*
 !.vscode/settings.json

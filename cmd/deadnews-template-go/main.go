@@ -10,14 +10,14 @@ import (
 
 // This code is the main function of a Go program
 // that creates and starts a server using the Echo framework.
-// It retrieves the value of the "PORT" environment variable
+// It retrieves the value of the "GO_PORT" environment variable
 // and if it is not set, it defaults to port 1271.
 func main() {
 	// Create a new Echo instance.
 	e := makeServer()
 
-	// Get the value of the "PORT" environment variable.
-	httpPort := os.Getenv("PORT")
+	// Get the value of the "GO_PORT" environment variable.
+	httpPort := os.Getenv("GO_PORT")
 	if httpPort == "" {
 		httpPort = "1271"
 	}
