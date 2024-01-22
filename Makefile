@@ -26,3 +26,17 @@ compose-up:
 
 compose-down:
 	docker compose down
+
+goreleaser:
+	goreleaser --clean --snapshot --skip=publish
+
+# confirm
+semantic-release:
+	git tag "$(svu next)"
+	git push origin "$(svu next)"
+
+semantic-prerelease:
+	git tag "$(svu prerelease --pre-release beta)"
+	git push origin "$(svu prerelease --pre-release beta)"
+
+# svu prerelease --pre-release beta.0
