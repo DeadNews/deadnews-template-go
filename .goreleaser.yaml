@@ -3,3 +3,15 @@ builds:
 
 release:
   prerelease: auto
+
+changelog:
+  sort: asc
+
+nfpms:
+  - id: "{{ .ProjectName }}"
+    description: Go Project Template
+    homepage: https://github.com/DeadNews/{{ .ProjectName }}
+    maintainer: DeadNews <aurczpbgr@mozmail.com>
+    formats:
+      - deb
+    bindir: /usr/bin

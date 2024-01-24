@@ -8,6 +8,9 @@ run:
 build:
 	go build -o ./dist/ ./...
 
+goreleaser:
+	goreleaser --clean --snapshot --skip=publish
+
 pc-install:
 	pre-commit install
 
