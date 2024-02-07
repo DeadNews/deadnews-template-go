@@ -1,5 +1,5 @@
 # Build the application from source.
-FROM golang:1.21.6-alpine@sha256:fd78f2fb1e49bcf343079bbbb851c936a18fc694df993cbddaa24ace0cc724c5 AS go-builder
+FROM golang:1.22.0-alpine@sha256:298646364548cc5e1372e2612a6a2aaa53d44bed00284ecbc89b7aa8a83ad602 AS go-builder
 
 ENV GOCACHE="/cache/go-build"
 
