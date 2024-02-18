@@ -52,7 +52,7 @@ func makeServer() *echo.Echo {
 
 // handleRoot handles the "/" route and returns an HTML response.
 func handleRoot(c echo.Context) error {
-	return c.HTML(http.StatusOK, "Hello, World!")
+	return c.HTML(http.StatusOK, "Hello, World!\n")
 }
 
 // handleHealth handles the "/health" route and returns a JSON response.

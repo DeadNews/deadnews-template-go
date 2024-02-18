@@ -33,7 +33,7 @@ func TestServerResponseRoot(t *testing.T) {
 	assert.Equal(t, expectedStatus, rec.Code)
 
 	// Check the actual response body against the expected response body.
-	expectedBody := "Hello, World!"
+	expectedBody := "Hello, World!\n"
 	assert.Equal(t, expectedBody, rec.Body.String())
 
 	// Check the response content type header.
