@@ -1,9 +1,7 @@
 # Build the application from source.
 FROM golang:1.22.0-alpine@sha256:8e96e6cff6a388c2f70f5f662b64120941fcd7d4b89d62fec87520323a316bd9 AS go-builder
 
-ENV \
-    # Maunt as dedicated RUN cache.
-    GOCACHE="/cache/go-build" \
+ENV GOCACHE="/cache/go-build" \
     # Disable CGO to build a static binary.
     CGO_ENABLED=0
 
