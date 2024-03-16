@@ -1,6 +1,6 @@
-.PHONY: all clean test default checks docker
+.PHONY: all clean default run build checks pc test
 
-default: build
+default: checks
 
 run:
 	go run cmd/deadnews-template-go/main.go
@@ -11,21 +11,13 @@ build:
 goreleaser:
 	goreleaser --clean --snapshot --skip=publish
 
-pc-install:
+install:
 	pre-commit install
 
-checks: pc-run test
+checks: pc test
 
-pc-run:
+pc:
 	pre-commit run -a
 
 test:
 	go test -v -race -covermode=atomic -coverprofile='coverage.txt' ./...
-
-docker: compose-up
-
-compose-up:
-	docker compose up --build
-
-compose-down:
-	docker compose down
