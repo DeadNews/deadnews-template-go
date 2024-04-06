@@ -1,4 +1,4 @@
-module github.com/DeadNews/deadnews-template-go
+module github.com/DeadNews/deadnews-template-go/v2
 
 go 1.21
 
