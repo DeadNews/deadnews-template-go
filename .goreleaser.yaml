@@ -14,25 +14,25 @@ changelog:
       - ^chore
       - ^test"
       - ^(ci|build|chore)\(deps.*\)
-  groups:
-    - title: Dependencies
-      regexp: ^fix\(deps.*\)
-      order: 300
-    - title: Features
-      regexp: ^feat
-      order: 100
-    - title: Security
-      regexp: ^sec
-      order: 150
-    - title: Bug fixes
-      regexp: ^(fix|refactor)
-      order: 200
-    - title: Documentation
-      regexp: ^docs
-      order: 400
-    - title: Build process
-      regexp: ^(build|ci)
-      order: 500
+  # groups:
+  #   - title: Dependencies
+  #     regexp: ^fix\(deps.*\)
+  #     order: 300
+  #   - title: Features
+  #     regexp: ^feat
+  #     order: 100
+  #   - title: Security
+  #     regexp: ^sec
+  #     order: 150
+  #   - title: Bug fixes
+  #     regexp: ^(fix|refactor)
+  #     order: 200
+  #   - title: Documentation
+  #     regexp: ^docs
+  #     order: 400
+  #   - title: Build process
+  #     regexp: ^(build|ci)
+  #     order: 500
 
 nfpms:
   - id: "{{ .ProjectName }}"
