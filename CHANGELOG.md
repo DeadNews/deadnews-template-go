@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.5-beta.3](https://github.com/DeadNews/deadnews-template-go/compare/v2.0.4...v2.0.5-beta.3) - 2024-04-06
+
+### 🐛 Bug fixes
+
+- update module path to `v2` - ([7311954](https://github.com/DeadNews/deadnews-template-go/commit/731195466984e25879a4f29b4274feff870ede8a))
+
+### 📚 Documentation
+
+- _(readme)_ update badges - ([7e6ee0d](https://github.com/DeadNews/deadnews-template-go/commit/7e6ee0ddf71dde474e89b46a9da9a1937cab9fa0))
+
+### ⚙️ CI/CD
+
+- _(github)_ update `goreleaser` job - ([ebf4c66](https://github.com/DeadNews/deadnews-template-go/commit/ebf4c660de5613d853acb60a701aa68546d9f869))
+- _(github)_ update `goreleaser` job - ([7dad6fc](https://github.com/DeadNews/deadnews-template-go/commit/7dad6fc4f757b0307bf45b25a7ed8171d93ab6cb))
+- _(github)_ update `goreleaser` job - ([b38cadb](https://github.com/DeadNews/deadnews-template-go/commit/b38cadb617bf715cca0384e3095656be919df709))
+
 ## [2.0.4](https://github.com/DeadNews/deadnews-template-go/compare/v2.0.3...v2.0.4) - 2024-04-06
 
 ### 📚 Documentation
