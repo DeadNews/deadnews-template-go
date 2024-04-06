@@ -3,7 +3,6 @@
 > Go Project Template
 
 [![GitHub: Release](https://img.shields.io/github/v/release/deadnews/deadnews-template-go?logo=github&logoColor=white)](https://github.com/deadnews/deadnews-template-go/releases/latest)
-[![GitHub: Go Mod Version](https://img.shields.io/github/go-mod/go-version/deadnews/deadnews-template-go?logo=go&logoColor=white)](https://github.com/DeadNews/deadnews-template-go)
 [![Docker: ghcr](https://img.shields.io/badge/docker-gray.svg?logo=docker&logoColor=white)](https://github.com/deadnews/deadnews-template-go/pkgs/container/deadnews-template-go)
 [![Go: Reference](https://pkg.go.dev/badge/github.com/deadnews/deadnews-template-go.svg)](https://pkg.go.dev/github.com/deadnews/deadnews-template-go)
 [![Go: Report Card](https://goreportcard.com/badge/github.com/deadnews/deadnews-template-go)](https://goreportcard.com/report/github.com/deadnews/deadnews-template-go)
