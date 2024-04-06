@@ -13,7 +13,7 @@ RUN --mount=type=cache,target=${GOCACHE} \
 
 # Deploy the application binary into a lean image.
 FROM gcr.io/distroless/static-debian12:latest@sha256:6dcc833df2a475be1a3d7fc951de90ac91a2cb0be237c7578b88722e48f2e56f AS runtime
-LABEL maintainer "DeadNews <aurczpbgr@mozmail.com>"
+LABEL maintainer "DeadNews <deadnewsgit@gmail.com>"
 
 ENV GO_PORT=1271
 
