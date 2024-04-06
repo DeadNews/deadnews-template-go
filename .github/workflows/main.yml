@@ -63,8 +63,9 @@ jobs:
 
   goreleaser:
     name: GoReleaser
-    if: startsWith(github.ref, 'refs/tags/')
+    if: github.ref_type == 'tag'
     needs: [lint, check-deps, tests]
+    environment: github-releases
     permissions:
       contents: write
     runs-on: ubuntu-latest

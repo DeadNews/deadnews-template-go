@@ -3,6 +3,8 @@ builds:
 
 release:
   prerelease: auto
+  footer: |
+    See [the CHANGELOG]({{ .GitURL }}/blob/main/CHANGELOG.md) for more details.
 
 changelog:
   sort: asc
@@ -10,8 +12,8 @@ changelog:
 nfpms:
   - id: "{{ .ProjectName }}"
     description: Go Project Template
-    homepage: https://github.com/DeadNews/{{ .ProjectName }}
-    maintainer: DeadNews <aurczpbgr@mozmail.com>
+    homepage: "{{ .GitURL }}"
+    maintainer: DeadNews <deadnewsgit@gmail.com>
     formats:
       - deb
     bindir: /usr/bin
