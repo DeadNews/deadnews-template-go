@@ -16,7 +16,7 @@ changelog:
       - ^(ci|build|chore)\(deps.*\)
   groups:
     - title: Dependencies
-      regexp: ^fix\(deps.*\)
+      regexp: '^fix\(deps.*\)'
   #     order: 300
   #   - title: Features
   #     regexp: ^feat
