@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.4-beta.0](https://github.com/DeadNews/deadnews-template-go/compare/v2.0.3...v2.0.4-beta.0) - 2024-04-06
+## [2.0.4-beta.1](https://github.com/DeadNews/deadnews-template-go/compare/v2.0.3...v2.0.4-beta.1) - 2024-04-06
 
 ### 📚 Documentation
 
@@ -24,6 +24,7 @@
 
 ### ⚙️ CI/CD
 
+- _(github)_ update `goreleaser` job - ([1d3464e](https://github.com/DeadNews/deadnews-template-go/commit/1d3464e2051cc81b068b7386ccee034beed63c14))
 - _(pre-commit)_ replace `hadolint-docker` with `hadolint-py` - ([944f617](https://github.com/DeadNews/deadnews-template-go/commit/944f617e6f5ac6913739c760979ae31ce5473d82))
 
 ### ⬆️ Dependencies
