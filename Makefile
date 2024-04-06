@@ -1,4 +1,4 @@
-.PHONY: all clean default run build checks pc test
+.PHONY: all clean default run build update checks pc test
 
 default: checks
 
@@ -10,6 +10,10 @@ build:
 
 goreleaser:
 	goreleaser --clean --snapshot --skip=publish
+
+update:
+	go get -u ./...
+	go mod tidy
 
 install:
 	pre-commit install
