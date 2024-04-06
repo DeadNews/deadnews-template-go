@@ -71,7 +71,7 @@ commit_parsers = [
   { message = "^style", group = "<!-- 5 -->🎨 Styling" },
   { message = "^test", group = "<!-- 6 -->🧪 Testing" },
   { message = "^chore", group = "<!-- 7 -->🧹 Chores" },
-  { message = "^sec", group = "<!-- 8 -->🛡️ Security" },
+  { body = ".*security", group = "<!-- 8 -->🛡️ Security" },
   { message = "^build", group = "<!-- 9 -->👷 Build" },
   { message = "^ci", group = "<!-- 91 -->⚙️ CI/CD" },
   { message = "^revert", group = "<!-- 93 -->◀️ Revert" },
