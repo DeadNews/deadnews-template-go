@@ -8,32 +8,31 @@ release:
 
 changelog:
   sort: asc
-  use: github
+  use: git
   filters:
     exclude:
-      - "^chore"
-      - "^test"
+      - ^chore
+      - ^test"
+      - ^(ci|build|chore)\(deps.*\)
   groups:
-    - title: Dependency updates
-      regexp: '^.*?(feat|fix|chore)\(deps\)!?:.+$'
+    - title: Dependencies
+      regexp: ^fix\(deps.*\)
       order: 300
-    - title: New Features
-      regexp: '^.*?feat(\(.+\))??!?:.+$'
+    - title: Features
+      regexp: ^feat
       order: 100
-    - title: Security updates
-      regexp: '^.*?sec(\(.+\))??!?:.+$'
+    - title: Security
+      regexp: ^sec
       order: 150
     - title: Bug fixes
-      regexp: '^.*?(fix|refactor)(\(.+\))??!?:.+$'
+      regexp: ^(fix|refactor)
       order: 200
-    - title: Documentation updates
-      regexp: ^.*?docs?(\(.+\))??!?:.+$
+    - title: Documentation
+      regexp: ^docs
       order: 400
-    - title: Build process updates
-      regexp: ^.*?(build|ci)(\(.+\))??!?:.+$
-      order: 400
-    - title: Other work
-      order: 9999
+    - title: Build process
+      regexp: ^(build|ci)
+      order: 500
 
 nfpms:
   - id: "{{ .ProjectName }}"
