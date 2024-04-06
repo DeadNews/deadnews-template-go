@@ -1,15 +1,20 @@
 # Changelog
 
-## [unreleased]
+## [2.0.4-beta.0](https://github.com/DeadNews/deadnews-template-go/compare/v2.0.3...v2.0.4-beta.0) - 2024-04-06
 
 ### 📚 Documentation
 
+- _(changelog)_ add `git-cliff` - ([072a4fd](https://github.com/DeadNews/deadnews-template-go/commit/072a4fdaf9271966695288ee4988bcd5217d42fc))
+- _(changelog)_ add `git-cliff` - ([08102e5](https://github.com/DeadNews/deadnews-template-go/commit/08102e5c77c9189ab3104bbd7070c755662609ef))
+- _(readme)_ update badges - ([61ac858](https://github.com/DeadNews/deadnews-template-go/commit/61ac858d692fe6e291574505ab02e0e76fcf22a4))
+- _(readme)_ update badges - ([cb62cf2](https://github.com/DeadNews/deadnews-template-go/commit/cb62cf25c608345c34073f28ca33993f1e946eeb))
 - _(readme)_ update badges - ([e171584](https://github.com/DeadNews/deadnews-template-go/commit/e171584c9c59e14a67747491b0804189ec3b242a))
 - _(readme)_ add badges - ([b0e89dc](https://github.com/DeadNews/deadnews-template-go/commit/b0e89dc0b9c1191933101d2ba7f450a731988f1f))
 
 ### 🧹 Chores
 
 - _(makefile)_ update - ([aa7e699](https://github.com/DeadNews/deadnews-template-go/commit/aa7e69997481479e4f0d62a03798d739409e58a8))
+- _(vscode)_ enable `go.diagnostic.vulncheck` - ([450bbb3](https://github.com/DeadNews/deadnews-template-go/commit/450bbb33fbb9ee7141dff214105dcac40594d4de))
 
 ### 👷 Build
 
