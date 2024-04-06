@@ -19,6 +19,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-go@v5
+        with:
+          go-version: stable
 
       - name: Lint code
         uses: golangci/golangci-lint-action@3cfe3a4abbb849e10058ce4af15d205b6da42804 # v4.0.0
@@ -32,6 +34,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-go@v5
+        with:
+          go-version: stable
 
       - name: Get govulncheck
         run: go install golang.org/x/vuln/cmd/govulncheck@latest
