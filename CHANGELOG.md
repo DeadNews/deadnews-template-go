@@ -1,20 +1,16 @@
 # Changelog
 
-## [2.0.4-beta.3](https://github.com/DeadNews/deadnews-template-go/compare/v2.0.3...v2.0.4-beta.3) - 2024-04-06
+## [2.0.4](https://github.com/DeadNews/deadnews-template-go/compare/v2.0.3...v2.0.4) - 2024-04-06
 
 ### 📚 Documentation
 
-- _(changelog)_ add `git-cliff` - ([072a4fd](https://github.com/DeadNews/deadnews-template-go/commit/072a4fdaf9271966695288ee4988bcd5217d42fc))
-- _(changelog)_ add `git-cliff` - ([08102e5](https://github.com/DeadNews/deadnews-template-go/commit/08102e5c77c9189ab3104bbd7070c755662609ef))
-- _(readme)_ update badges - ([61ac858](https://github.com/DeadNews/deadnews-template-go/commit/61ac858d692fe6e291574505ab02e0e76fcf22a4))
-- _(readme)_ update badges - ([cb62cf2](https://github.com/DeadNews/deadnews-template-go/commit/cb62cf25c608345c34073f28ca33993f1e946eeb))
+- _(changelog)_ add `git-cliff` ([#67](https://github.com/DeadNews/deadnews-template-python/issues/67)) - ([1f93052](https://github.com/DeadNews/deadnews-template-go/commit/1f930527660452e569d10576c3b22a82ecc49089))
 - _(readme)_ update badges - ([e171584](https://github.com/DeadNews/deadnews-template-go/commit/e171584c9c59e14a67747491b0804189ec3b242a))
 - _(readme)_ add badges - ([b0e89dc](https://github.com/DeadNews/deadnews-template-go/commit/b0e89dc0b9c1191933101d2ba7f450a731988f1f))
 
 ### 🧹 Chores
 
 - _(makefile)_ update - ([aa7e699](https://github.com/DeadNews/deadnews-template-go/commit/aa7e69997481479e4f0d62a03798d739409e58a8))
-- _(vscode)_ enable `go.diagnostic.vulncheck` - ([450bbb3](https://github.com/DeadNews/deadnews-template-go/commit/450bbb33fbb9ee7141dff214105dcac40594d4de))
 
 ### 👷 Build
 
@@ -24,10 +20,6 @@
 
 ### ⚙️ CI/CD
 
-- _(github)_ update `goreleaser` job - ([21fc62c](https://github.com/DeadNews/deadnews-template-go/commit/21fc62c7a3998d4956d01a7b24db16a891567f2e))
-- _(github)_ update `goreleaser` job - ([0eb95a7](https://github.com/DeadNews/deadnews-template-go/commit/0eb95a70407f8bb4f74b0b6e6fce58eb046d7b57))
-- _(github)_ update `goreleaser` job - ([f33ebe3](https://github.com/DeadNews/deadnews-template-go/commit/f33ebe34164b9402606e88f2825629834c98a666))
-- _(github)_ update `goreleaser` job - ([1d3464e](https://github.com/DeadNews/deadnews-template-go/commit/1d3464e2051cc81b068b7386ccee034beed63c14))
 - _(pre-commit)_ replace `hadolint-docker` with `hadolint-py` - ([944f617](https://github.com/DeadNews/deadnews-template-go/commit/944f617e6f5ac6913739c760979ae31ce5473d82))
 
 ### ⬆️ Dependencies
@@ -55,7 +47,7 @@
 ### 👷 Build
 
 - _(docker)_ update `Dockerfile` - ([1e825c5](https://github.com/DeadNews/deadnews-template-go/commit/1e825c5aa9ee4c5b8f27b5ace518c726dab848c4))
-- _(dockerfile)_ update paths - ([2ac9e66](https://github.com/DeadNews/deadnews-template-go/commit/2ac9e66809d7cf82750c0df3324408deec7d7ec5))
+- _(dockerfile)_ update pathes - ([2ac9e66](https://github.com/DeadNews/deadnews-template-go/commit/2ac9e66809d7cf82750c0df3324408deec7d7ec5))
 
 ### ⬆️ Dependencies
 
