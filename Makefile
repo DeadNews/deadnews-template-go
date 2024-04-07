@@ -14,6 +14,7 @@ goreleaser:
 update:
 	go get -u ./...
 	go mod tidy
+	go mod verify
 
 install:
 	pre-commit install
