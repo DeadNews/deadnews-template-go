@@ -16,22 +16,22 @@ changelog:
       - ^(ci|build|chore)\(deps.*\)
   groups:
     - title: Dependencies
-      regexp: ^fix\(deps.*\)
+      regexp: ^fix\(deps.*\).*
       order: 300
     - title: Features
-      regexp: ^feat
+      regexp: ^feat.*
       order: 100
     - title: Security
-      regexp: ^sec
+      regexp: ^sec.*
       order: 150
     - title: Bug fixes
-      regexp: ^(fix|refactor)
+      regexp: ^(fix|refactor).*
       order: 200
     - title: Documentation
-      regexp: ^docs
+      regexp: ^docs.*
       order: 400
     - title: Build process
-      regexp: ^(build|ci)
+      regexp: ^(build|ci).*
       order: 500
     - title: Other work
       order: 999
