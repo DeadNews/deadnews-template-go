@@ -1,9 +1,10 @@
 # Changelog
 
-## [2.0.6-beta.0](https://github.com/DeadNews/deadnews-template-go/compare/v2.0.5...v2.0.6-beta.0) - 2024-04-07
+## [2.0.6-beta.1](https://github.com/DeadNews/deadnews-template-go/compare/v2.0.5...v2.0.6-beta.1) - 2024-04-07
 
 ### ⚙️ CI/CD
 
+- _(github)_ update `goreleaser` job - ([089506b](https://github.com/DeadNews/deadnews-template-go/commit/089506b46364903e0dbf8b181994f3f92cdd510f))
 - _(github)_ update `goreleaser` job - ([db6c6ca](https://github.com/DeadNews/deadnews-template-go/commit/db6c6caa4baa7daaffdc26e2bae679234ec632e4))
 
 ## [2.0.5](https://github.com/DeadNews/deadnews-template-go/compare/v2.0.4...v2.0.5) - 2024-04-06
