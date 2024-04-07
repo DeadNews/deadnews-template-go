@@ -31,7 +31,7 @@ changelog:
       regexp: ^docs.*
       order: 400
     - title: Build process
-      regexp: ^.*?(build|ci)(\(.+\))??!?:.+$
+      regexp: ^(build|ci).*$
       order: 500
     - title: Other work
       order: 999
