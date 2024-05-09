@@ -1,8 +1,7 @@
-version: "3"
 services:
   web:
     build: .
     ports:
-      - 127.0.0.1:${GO_PORT:-1271}:${GO_PORT:-1271}
+      - 127.0.0.1:${SERVICE_PORT:-8000}:${SERVICE_PORT:-8000}
     environment:
-      GO_PORT: ${GO_PORT:-1271}
+      SERVICE_PORT: ${SERVICE_PORT:-8000}
