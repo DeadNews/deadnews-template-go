@@ -72,6 +72,8 @@ jobs:
     environment: github-releases
     permissions:
       contents: write
+    env:
+      DRAFT: ${{ contains(github.ref, 'alpha') || contains(github.ref, 'beta') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -86,6 +88,6 @@ jobs:
         uses: goreleaser/goreleaser-action@7ec5c2b0c6cdda6e8bbb49444bc797dd33d74dd8 # v5.0.0
         with:
           version: latest
-          args: release --clean
+          args: release --clean --draft ${{ env.DRAFT }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

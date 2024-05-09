@@ -15,12 +15,12 @@ RUN --mount=type=cache,target=${GOCACHE} \
 FROM gcr.io/distroless/static-debian12:latest@sha256:41972110a1c1a5c0b6adb283e8aa092c43c31f7c5d79b8656fbffff2c3e61f05 AS runtime
 LABEL maintainer "DeadNews <deadnewsgit@gmail.com>"
 
-ENV GO_PORT=1271
+ENV SERVICE_PORT=8000
 
 COPY --from=go-builder /app/dist/deadnews-template-go /usr/local/bin/deadnews-template-go
 
 USER nonroot:nonroot
-EXPOSE ${GO_PORT}
+EXPOSE ${SERVICE_PORT}
 HEALTHCHECK NONE
 
 CMD ["deadnews-template-go"]

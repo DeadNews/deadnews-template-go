@@ -63,6 +63,6 @@ func TestServerResponseHealth(t *testing.T) {
 	assert.Equal(t, expectedBody, rec.Body.String())
 
 	// Check the response content type header.
-	contentType := "application/json; charset=UTF-8"
+	contentType := "application/json"
 	assert.Equal(t, contentType, rec.Header().Get("Content-Type"))
 }
