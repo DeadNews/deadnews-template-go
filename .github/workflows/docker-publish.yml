@@ -16,6 +16,6 @@ permissions:
 jobs:
   docker:
     name: Docker
-    uses: deadnews/deadnews-template-docker/.github/workflows/docker-reusable.yml@latest
+    uses: deadnews/deadnews-template-docker/.github/workflows/docker-reusable.yml@main
     with:
       build-platforms: linux/amd64
