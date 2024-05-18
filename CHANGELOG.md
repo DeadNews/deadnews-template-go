@@ -1,17 +1,18 @@
 # Changelog
 
-## [2.0.6-alpha.3](https://github.com/DeadNews/deadnews-template-go/compare/v2.0.5...v2.0.6-alpha.3) - 2024-05-12
+## [2.0.6](https://github.com/DeadNews/deadnews-template-go/compare/v2.0.5...v2.0.6) - 2024-05-18
 
 ### 📚 Documentation
 
 - _(readme)_ update badges - ([1a64c93](https://github.com/DeadNews/deadnews-template-go/commit/1a64c93b726de87e029206403ef3af30b8e65fe0))
 
+### 🧹 Chores
+
+- _(typos)_ ignore short words - ([9bff8a9](https://github.com/DeadNews/deadnews-template-go/commit/9bff8a9a769315168791358f84ae94e1937bc19f))
+
 ### ⚙️ CI/CD
 
-- _(github)_ update `goreleaser` job - ([e309fbb](https://github.com/DeadNews/deadnews-template-go/commit/e309fbb3ac88f4c79b7cc5212b44d6c10087461f))
-- _(github)_ update `goreleaser` job - ([77cf937](https://github.com/DeadNews/deadnews-template-go/commit/77cf937b39fd99d230a14f611b395a47aacba080))
-- _(github)_ update `goreleaser` job - ([0932fca](https://github.com/DeadNews/deadnews-template-go/commit/0932fcaed6773e2faf2345cddceaf1aebff72153))
-- _(github)_ update `goreleaser` job - ([9e4ad1e](https://github.com/DeadNews/deadnews-template-go/commit/9e4ad1e52ae7200de0dcf825b452bf90b3f2fc06))
+- _(github)_ update `goreleaser` job ([#75](https://github.com/DeadNews/deadnews-template-python/issues/75)) - ([7e57d9c](https://github.com/DeadNews/deadnews-template-go/commit/7e57d9cbe6d4156631b2cc7b30399f144b1ebe5a))
 - _(github)_ update `goreleaser` job ([#70](https://github.com/DeadNews/deadnews-template-python/issues/70)) - ([f703317](https://github.com/DeadNews/deadnews-template-go/commit/f703317d71f90aeb45fa87210624440e9908244f))
 - _(github)_ update `goreleaser` job ([#69](https://github.com/DeadNews/deadnews-template-python/issues/69)) - ([961743a](https://github.com/DeadNews/deadnews-template-go/commit/961743a14257db69f6d63ec4cb693bef42f980d3))
 
