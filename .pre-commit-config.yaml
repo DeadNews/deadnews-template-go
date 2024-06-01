@@ -30,13 +30,13 @@ repos:
       - id: typos
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.28.3
+    rev: 0.28.4
     hooks:
       - id: check-github-workflows
       - id: check-renovate
 
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.0
+    rev: v1.7.1
     hooks:
       - id: actionlint
 
@@ -51,7 +51,7 @@ repos:
       - id: gitleaks
 
   - repo: https://github.com/golangci/golangci-lint
-    rev: v1.58.1
+    rev: v1.59.0
     hooks:
       - id: golangci-lint
 
