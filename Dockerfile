@@ -1,5 +1,5 @@
 # Build the application from source.
-FROM golang:1.22.3-alpine@sha256:f1fe698725f6ed14eb944dc587591f134632ed47fc0732ec27c7642adbe90618 AS go-builder
+FROM golang:1.22.3-alpine@sha256:7e788330fa9ae95c68784153b7fd5d5076c79af47651e992a3cdeceeb5dd1df0 AS go-builder
 
 ENV GOCACHE="/cache/go-build" \
     # Disable CGO to build a static binary.
