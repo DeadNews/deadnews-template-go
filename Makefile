@@ -20,10 +20,8 @@ install:
 	pre-commit install
 
 checks: pc test
-
 pc:
 	pre-commit run -a
-
 test:
 	go test -v -race -covermode=atomic -coverprofile='coverage.txt' ./...
 
