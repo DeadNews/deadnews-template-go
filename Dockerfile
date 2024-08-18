@@ -25,4 +25,4 @@ USER nonroot:nonroot
 EXPOSE ${SERVICE_PORT}
 HEALTHCHECK NONE
 
-ENTRYPOINT [ "/bin/deadnews-template-go" ]
+ENTRYPOINT ["/bin/deadnews-template-go"]
