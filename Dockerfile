@@ -21,7 +21,6 @@ COPY --from=go-builder /app/dist/deadnews-template-go /bin/deadnews-template-go
 
 RUN ["/busybox/sh", "-c", "ln -s /busybox/sh /bin/sh"]
 
-
 USER nonroot:nonroot
 EXPOSE ${SERVICE_PORT}
 HEALTHCHECK NONE
