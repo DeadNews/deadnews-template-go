@@ -4,12 +4,14 @@ linters:
   enable:
     - bidichk
     - bodyclose
+    - copyloopvar
+    - decorder
     - dogsled
     - dupl
     - errcheck
     - errorlint
     - exhaustive
-    - exportloopref
+    - fatcontext
     - funlen
     - gochecknoinits
     - goconst
@@ -24,15 +26,20 @@ linters:
     - gosimple
     - govet
     - ineffassign
-    - lll
+    - intrange
     - misspell
     - nakedret
     - noctx
     - nolintlint
+    - perfsprint
+    - prealloc
     - predeclared
+    - promlinter
     - revive
+    - sloglint
     - staticcheck
     - stylecheck
+    - testifylint
     - typecheck
     - unconvert
     - unparam
