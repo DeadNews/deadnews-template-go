@@ -36,7 +36,9 @@ linters:
     - predeclared
     - promlinter
     - revive
+    - rowserrcheck
     - sloglint
+    - sqlclosecheck
     - staticcheck
     - stylecheck
     - testifylint
