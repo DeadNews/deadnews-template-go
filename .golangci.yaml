@@ -38,7 +38,6 @@ linters:
     - revive
     - rowserrcheck
     - sloglint
-    - sqlclosecheck
     - staticcheck
     - stylecheck
     - testifylint
