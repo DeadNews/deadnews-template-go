@@ -25,18 +25,18 @@ repos:
       - id: prettier
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.29.4
+    rev: v1.29.5
     hooks:
       - id: typos
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.31.0
+    rev: 0.31.1
     hooks:
       - id: check-github-workflows
       - id: check-renovate
 
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.6
+    rev: v1.7.7
     hooks:
       - id: actionlint
 
@@ -46,7 +46,7 @@ repos:
       - id: checkmake
 
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.22.1
+    rev: v8.23.3
     hooks:
       - id: gitleaks
 
