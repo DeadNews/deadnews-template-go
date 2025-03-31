@@ -42,7 +42,6 @@ linters:
     - unused
     - wastedassign
     - whitespace
-    - staticcheck
 
 formatters:
   enable:
