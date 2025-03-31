@@ -1,6 +1,7 @@
-# https://golangci-lint.run/usage/linters/
+version: "2"
+
 linters:
-  disable-all: true
+  default: none
   enable:
     - bidichk
     - bodyclose
@@ -18,12 +19,8 @@ linters:
     - gocritic
     - gocyclo
     - godot
-    - gofmt
-    - gofumpt
-    - goimports
     - goprintffuncname
     - gosec
-    - gosimple
     - govet
     - ineffassign
     - intrange
@@ -39,11 +36,16 @@ linters:
     - rowserrcheck
     - sloglint
     - staticcheck
-    - stylecheck
     - testifylint
-    - typecheck
     - unconvert
     - unparam
     - unused
     - wastedassign
     - whitespace
+    - staticcheck
+
+formatters:
+  enable:
+    - gofmt
+    - gofumpt
+    - goimports

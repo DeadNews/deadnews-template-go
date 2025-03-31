@@ -1,3 +1,4 @@
+// Package main is the entry point for the deadnews-template-go application.
 package main
 
 import (
