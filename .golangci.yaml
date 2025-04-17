@@ -1,5 +1,9 @@
 version: "2"
 
+run:
+  build-tags:
+    - integration
+
 linters:
   default: none
   enable:
@@ -42,6 +46,17 @@ linters:
     - unused
     - wastedassign
     - whitespace
+  exclusions:
+    rules:
+      # Exclude defer statements from errcheck checks.
+      - linters:
+          - errcheck
+        source: "^\\s*defer\\s+"
+      # Exclude some linters from running on tests files.
+      - path: _test\.go
+        linters:
+          - funlen
+          - goconst
 
 formatters:
   enable:

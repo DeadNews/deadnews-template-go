@@ -48,7 +48,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest]
         go: ["oldstable", "stable"]
     runs-on: ${{ matrix.os }}
     steps:

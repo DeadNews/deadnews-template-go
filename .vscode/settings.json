@@ -9,6 +9,7 @@
   "go.lintTool": "golangci-lint",
   "go.useLanguageServer": true,
   "gopls": {
+    "build.buildFlags": ["-tags=integration"],
     "formatting.gofumpt": true
   }
 }
