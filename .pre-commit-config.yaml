@@ -25,12 +25,12 @@ repos:
       - id: prettier
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.29.5
+    rev: v1.31.2
     hooks:
       - id: typos
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.32.1
+    rev: 0.33.0
     hooks:
       - id: check-github-workflows
       - id: check-renovate
@@ -46,12 +46,12 @@ repos:
       - id: checkmake
 
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.24.2
+    rev: v8.25.0
     hooks:
       - id: gitleaks
 
   - repo: https://github.com/golangci/golangci-lint
-    rev: v2.0.2
+    rev: v2.1.5
     hooks:
       - id: golangci-lint
 
