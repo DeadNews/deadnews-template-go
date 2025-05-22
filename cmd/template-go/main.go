@@ -1,7 +1,9 @@
-// Package main is the entry point for the deadnews-template-go application.
+// Package main is the entry point for the template-go application.
 package main
 
 import (
+	"flag"
+	"fmt"
 	"net/http"
 	"os"
 
@@ -14,6 +16,20 @@ import (
 // It retrieves the value of the "SERVICE_PORT" environment variable
 // and if it is not set, it defaults to port 8000.
 func main() {
+	// Parse command-line flags
+	healthcheckURL := flag.String("healthcheck", "", "Perform a health check against the given URL and exit")
+	flag.Parse()
+
+	// Handle health check mode
+	if *healthcheckURL != "" {
+		if err := healthCheck(*healthcheckURL); err != nil {
+			fmt.Fprintf(os.Stderr, "Health check failed: %v\n", err)
+			os.Exit(1)
+		}
+		fmt.Println("Health check succeeded")
+		os.Exit(0)
+	}
+
 	// Create a new Echo instance.
 	e := makeServer()
 
