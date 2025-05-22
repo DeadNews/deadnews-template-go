@@ -1,8 +1,8 @@
 services:
-  service:
+  template-go:
     build: .
     healthcheck:
-      test: wget --no-verbose --tries=1 --spider http://127.0.0.1:8000/health || exit 1
+      test: [CMD, /bin/template-go, --healthcheck, http://127.0.0.1:8000/health]
       interval: 1m
       retries: 3
       timeout: 10s
