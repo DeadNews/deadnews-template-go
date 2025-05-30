@@ -20,7 +20,7 @@ jobs:
 
       - uses: actions/setup-go@v5
         with:
-          go-version: stable
+          go-version-file: go.mod
 
       - name: Lint code
         uses: golangci/golangci-lint-action@1481404843c368bc19ca9406f87d6e0fc97bdcfd # v7.0.0
@@ -35,7 +35,7 @@ jobs:
 
       - uses: actions/setup-go@v5
         with:
-          go-version: stable
+          go-version-file: go.mod
 
       - name: Get govulncheck
         run: go install golang.org/x/vuln/cmd/govulncheck@latest
@@ -49,20 +49,19 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        go: ["oldstable", "stable"]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-go@v5
         with:
-          go-version: ${{ matrix.go }}
+          go-version-file: go.mod
 
       - name: Run tests
         run: make test
 
       - name: Upload coverage to Codecov
-        if: matrix.os == 'ubuntu-latest' && matrix.go == 'stable'
+        if: matrix.os == 'ubuntu-latest'
         uses: codecov/codecov-action@4fe8c5f003fae66aa5ebb77cfd3e7bfbbda0b6b0 # v3.1.5
 
   goreleaser:
@@ -82,7 +81,7 @@ jobs:
 
       - uses: actions/setup-go@v5
         with:
-          go-version: stable
+          go-version-file: go.mod
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@9c156ee8a17a598857849441385a2041ef570552 # v6.3.0
