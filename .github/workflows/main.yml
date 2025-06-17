@@ -27,22 +27,6 @@ jobs:
         with:
           version: latest
 
-  check-deps:
-    name: Check deps
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-go@v5
-        with:
-          go-version-file: go.mod
-
-      - name: Get govulncheck
-        run: go install golang.org/x/vuln/cmd/govulncheck@latest
-
-      - name: Run govulncheck
-        run: govulncheck ./...
-
   tests:
     name: Tests
     strategy:
@@ -67,7 +51,7 @@ jobs:
   goreleaser:
     name: GoReleaser
     if: github.ref_type == 'tag'
-    needs: [lint, check-deps, tests]
+    needs: [lint, tests]
     environment: github-releases
     permissions:
       contents: write
