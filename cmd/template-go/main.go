@@ -2,20 +2,23 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
+	"log/slog"
 	"net/http"
 	"os"
+	"time"
 
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/httplog/v3"
 )
 
-// This code is the main function of a Go program
-// that creates and starts a server using the Echo framework.
-// It retrieves the value of the "SERVICE_PORT" environment variable
-// and if it is not set, it defaults to port 8000.
 func main() {
+	// Setup structured logging
+	slog.SetDefault(slog.New(slog.NewTextHandler(os.Stdout, nil)))
+
 	// Parse command-line flags
 	healthcheckURL := flag.String("healthcheck", "", "Perform a health check against the given URL and exit")
 	flag.Parse()
@@ -30,49 +33,48 @@ func main() {
 		os.Exit(0)
 	}
 
-	// Create a new Echo instance.
-	e := makeServer()
-
-	// Get the value of the "SERVICE_PORT" environment variable.
-	httpPort := os.Getenv("SERVICE_PORT")
-	if httpPort == "" {
-		httpPort = "8000"
+	// Get port from environment
+	port := os.Getenv("SERVICE_PORT")
+	if port == "" {
+		port = "8000"
 	}
 
-	// Start the server on the specified port.
-	e.Logger.Fatal(e.Start(":" + httpPort))
+	// Create and start server
+	server := makeServer(":" + port)
+	slog.Info("Starting server", "port", port)
+
+	if err := server.ListenAndServe(); err != nil {
+		slog.Error("Server failed", "error", err)
+		os.Exit(1)
+	}
 }
 
-// makeServer creates a new instance of the Echo framework
-// and configures it with middleware for logging and error recovery.
-// It also defines two route handlers: one for the root ("/") route that returns an HTML response,
-// and another for the "/health" route that returns a JSON response.
-//
-// Returns:
-// - A configured instance of the Echo framework.
-func makeServer() *echo.Echo {
-	// Create a new Echo instance.
-	e := echo.New()
+// makeServer creates a configured HTTP server with Chi router.
+func makeServer(addr string) *http.Server {
+	r := chi.NewRouter()
 
-	// Use middleware for logging and error recovery.
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
+	r.Use(middleware.RequestID)
+	r.Use(httplog.RequestLogger(slog.Default(), &httplog.Options{}))
+	r.Use(middleware.Recoverer)
+	r.Use(middleware.Heartbeat("/health"))
 
-	// Define the "/" route handler.
-	e.GET("/", handleRoot)
+	r.Get("/test", handleTest)
 
-	// Define the "/health" route handler.
-	e.GET("/health", handleHealth)
-
-	return e
+	return &http.Server{
+		Addr:         addr,
+		Handler:      r,
+		ReadTimeout:  15 * time.Second,
+		WriteTimeout: 15 * time.Second,
+		IdleTimeout:  60 * time.Second,
+	}
 }
 
-// handleRoot handles the "/" route and returns an HTML response.
-func handleRoot(c echo.Context) error {
-	return c.HTML(http.StatusOK, "Hello, World!\n")
-}
-
-// handleHealth handles the "/health" route and returns a JSON response.
-func handleHealth(c echo.Context) error {
-	return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK"})
+// handleTest returns a JSON health status.
+func handleTest(w http.ResponseWriter, _ *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	resp := map[string]string{"status": "ok"}
+	if err := json.NewEncoder(w).Encode(resp); err != nil {
+		slog.Error("failed to write JSON response", "error", err)
+	}
 }

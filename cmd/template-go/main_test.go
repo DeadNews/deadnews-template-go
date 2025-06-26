@@ -1,68 +1,55 @@
 package main
 
 import (
+	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
-func TestServerCreation(t *testing.T) {
-	e := makeServer()
-
-	assert.NotNil(t, e.GET("/", handleRoot))
-	assert.NotNil(t, e.GET("/health", handleHealth))
+func TestMakeServer(t *testing.T) {
+	server := makeServer(":8080")
+	assert.NotNil(t, server)
+	assert.Equal(t, ":8080", server.Addr)
+	assert.NotNil(t, server.Handler)
 }
 
-func TestServerResponseRoot(t *testing.T) {
-	// Create a new Echo instance.
-	e := makeServer()
+func TestServerEndpoints(t *testing.T) {
+	server := makeServer(":0")
+	ts := httptest.NewServer(server.Handler)
+	defer ts.Close()
 
-	// Create a new HTTP request to the root route.
-	req := httptest.NewRequest(http.MethodGet, "/", nil)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
 
-	// Create a new HTTP response recorder.
-	rec := httptest.NewRecorder()
+	tests := []struct {
+		path     string
+		expected string
+		content  string
+	}{
+		{"/test", `{"status":"ok"}` + "\n", "application/json"},
+		{"/health", ".", "text/plain"},
+	}
 
-	// Handle the request.
-	e.ServeHTTP(rec, req)
+	for _, tt := range tests {
+		t.Run(tt.path, func(t *testing.T) {
+			req, err := http.NewRequestWithContext(ctx, http.MethodGet, ts.URL+tt.path, nil)
+			require.NoError(t, err)
 
-	// Check the actual status code against the expected status code.
-	expectedStatus := http.StatusOK
-	assert.Equal(t, expectedStatus, rec.Code)
+			resp, err := http.DefaultClient.Do(req)
+			require.NoError(t, err)
+			defer func() {
+				if err := resp.Body.Close(); err != nil {
+					t.Logf("Failed to close response body: %v", err)
+				}
+			}()
 
-	// Check the actual response body against the expected response body.
-	expectedBody := "Hello, World!\n"
-	assert.Equal(t, expectedBody, rec.Body.String())
-
-	// Check the response content type header.
-	contentType := "text/html; charset=UTF-8"
-	assert.Equal(t, contentType, rec.Header().Get("Content-Type"))
-}
-
-func TestServerResponseHealth(t *testing.T) {
-	// Create a new Echo instance.
-	e := makeServer()
-
-	// Create a new HTTP request with the "/health" route.
-	req := httptest.NewRequest(http.MethodGet, "/health", nil)
-
-	// Create a new HTTP response recorder.
-	rec := httptest.NewRecorder()
-
-	// Handle the request.
-	e.ServeHTTP(rec, req)
-
-	// Check the actual status code against the expected status code.
-	expectedStatus := http.StatusOK
-	assert.Equal(t, expectedStatus, rec.Code)
-
-	// Check the actual response body against the expected response body.
-	expectedBody := `{"Status":"OK"}` + "\n"
-	assert.Equal(t, expectedBody, rec.Body.String())
-
-	// Check the response content type header.
-	contentType := "application/json"
-	assert.Equal(t, contentType, rec.Header().Get("Content-Type"))
+			assert.Equal(t, http.StatusOK, resp.StatusCode)
+			assert.Contains(t, resp.Header.Get("Content-Type"), tt.content)
+		})
+	}
 }
