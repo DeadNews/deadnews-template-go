@@ -2,12 +2,15 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"flag"
 	"fmt"
 	"log/slog"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
 	"github.com/go-chi/chi/v5"
@@ -39,18 +42,40 @@ func main() {
 		port = "8000"
 	}
 
-	// Create and start server
-	server := makeServer(":" + port)
-	slog.Info("Starting server", "port", port)
+	// Create server
+	server := setupServer(":" + port)
 
-	if err := server.ListenAndServe(); err != nil {
-		slog.Error("Server failed", "error", err)
+	// Create context that cancels on SIGINT/SIGTERM
+	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
+	defer stop()
+
+	// Graceful shutdown goroutine
+	go func() {
+		// Wait for termination signal
+		<-ctx.Done()
+		slog.Info("Shutdown signal received")
+
+		// Graceful shutdown with timeout
+		shutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+
+		if err := server.Shutdown(shutdownCtx); err != nil {
+			slog.Error("Server shutdown error", "error", err)
+		} else {
+			slog.Info("Server has been shut down")
+		}
+	}()
+
+	// Start server
+	slog.Info("Starting server", "port", port)
+	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		slog.Error("Server error", "error", err)
 		os.Exit(1)
 	}
 }
 
-// makeServer creates a configured HTTP server with Chi router.
-func makeServer(addr string) *http.Server {
+// setupServer creates a configured HTTP server with Chi router.
+func setupServer(addr string) *http.Server {
 	r := chi.NewRouter()
 
 	r.Use(middleware.RequestID)

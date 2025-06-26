@@ -11,15 +11,15 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestMakeServer(t *testing.T) {
-	server := makeServer(":8080")
+func TestSetupServer(t *testing.T) {
+	server := setupServer(":8080")
 	assert.NotNil(t, server)
 	assert.Equal(t, ":8080", server.Addr)
 	assert.NotNil(t, server.Handler)
 }
 
 func TestServerEndpoints(t *testing.T) {
-	server := makeServer(":0")
+	server := setupServer(":0")
 	ts := httptest.NewServer(server.Handler)
 	defer ts.Close()
 
