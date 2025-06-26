@@ -3,7 +3,7 @@
 default: checks
 
 run:
-	go run cmd/deadnews-template-go/main.go
+	go run cmd/template-go/main.go
 
 build:
 	go build -o ./dist/ ./...

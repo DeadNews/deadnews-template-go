@@ -1,7 +1,13 @@
 version: 2
 
 builds:
-  - main: ./cmd/deadnews-template-go/
+  - main: ./cmd/template-go/
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
 
 release:
   prerelease: auto
