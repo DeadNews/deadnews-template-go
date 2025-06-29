@@ -5,12 +5,13 @@
     {
       "customType": "regex",
       "description": "Detect Docker images in Go test files",
-      "managerFilePatterns": ["main_test.go$"],
+      "fileMatch": ["main_test.go$"],
       "matchStrings": [
         "Image:\\s*\"(?<depName>[\\w\\-/]+):(?<currentValue>[\\w\\.\\-]+)\""
       ],
       "datasourceTemplate": "docker",
-      "versioningTemplate": "semver"
+      "versioningTemplate": "semver",
+      "semanticCommitType": "test"
     }
   ]
 }
