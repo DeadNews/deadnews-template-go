@@ -27,8 +27,8 @@ jobs:
         with:
           version: latest
 
-  tests:
-    name: Tests
+  test:
+    name: Test
     strategy:
       fail-fast: false
       matrix:
@@ -42,7 +42,7 @@ jobs:
           go-version-file: go.mod
 
       - name: Run tests
-        run: make test
+        run: make integr
 
       - name: Upload coverage to Codecov
         if: matrix.os == 'ubuntu-latest'
@@ -51,7 +51,7 @@ jobs:
   goreleaser:
     name: GoReleaser
     if: github.ref_type == 'tag'
-    needs: [lint, tests]
+    needs: [lint, test]
     environment: github-releases
     permissions:
       contents: write

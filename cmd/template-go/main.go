@@ -42,8 +42,14 @@ func main() {
 		port = "8000"
 	}
 
+	// Get database DSN from environment
+	dsn := os.Getenv("SERVICE_DSN")
+	if dsn == "" {
+		slog.Error("SERVICE_DSN environment variable is not set")
+	}
+
 	// Create server
-	server := setupServer(":" + port)
+	server := setupServer(":"+port, dsn)
 
 	// Create context that cancels on SIGINT/SIGTERM
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
@@ -74,7 +80,7 @@ func main() {
 }
 
 // setupServer creates a configured HTTP server with Chi router.
-func setupServer(addr string) *http.Server {
+func setupServer(addr, dsn string) *http.Server {
 	r := chi.NewRouter()
 
 	r.Use(middleware.RequestID)
@@ -82,7 +88,7 @@ func setupServer(addr string) *http.Server {
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.Heartbeat("/health"))
 
-	r.Get("/test", handleTest)
+	r.Get("/test", handleDatabaseTest(dsn))
 
 	return &http.Server{
 		Addr:         addr,
@@ -93,13 +99,20 @@ func setupServer(addr string) *http.Server {
 	}
 }
 
-// handleTest returns a JSON health status.
-func handleTest(w http.ResponseWriter, _ *http.Request) {
-	resp := map[string]string{"status": "ok"}
+// handleDatabaseTest creates a handler that returns database information as JSON.
+func handleDatabaseTest(dsn string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		dbInfo, err := getDatabaseInfo(r.Context(), dsn)
+		if err != nil {
+			slog.Error("Failed to get database info", "error", err)
+			http.Error(w, "Internal server error", http.StatusInternalServerError)
+			return
+		}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	if err := json.NewEncoder(w).Encode(resp); err != nil {
-		slog.Error("failed to write JSON response", "error", err)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		if err := json.NewEncoder(w).Encode(dbInfo); err != nil {
+			slog.Error("Failed to write JSON response", "error", err)
+		}
 	}
 }

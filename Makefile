@@ -1,4 +1,4 @@
-.PHONY: all clean default run build update checks pc test
+.PHONY: all clean default run build update checks pc test integr
 
 default: checks
 
@@ -16,26 +16,24 @@ update:
 	go mod tidy
 	go mod verify
 
-install:
-	pre-commit install
-
 checks: pc test
 pc:
 	pre-commit run -a
 test:
 	go test -v -race -covermode=atomic -coverprofile='coverage.txt' ./...
 
+integr:
+	TESTCONTAINERS=1 go test -v -race -covermode=atomic -coverprofile=coverage.txt ./...
+
 bumped:
 	git cliff --bumped-version
 
-# make release-tag_name
-# make release-$(git cliff --bumped-version)-alpha.0
-release-%: checks
-	git cliff -o CHANGELOG.md --tag $*
+# make release TAG=$(git cliff --bumped-version)-alpha.0
+release: checks
+	git cliff -o CHANGELOG.md --tag $(TAG)
 	pre-commit run --files CHANGELOG.md || pre-commit run --files CHANGELOG.md
 	git add CHANGELOG.md
-	git commit -m "chore(release): prepare for $*"
+	git commit -m "chore(release): prepare for $(TAG)"
 	git push
-	git tag -a $* -m "chore(release): $*"
-	git push origin $*
-	git tag --verify $*
+	git tag -a $(TAG) -m "chore(release): $(TAG)"
+	git push origin $(TAG)
