@@ -2,20 +2,26 @@
 package main
 
 import (
+	"context"
+	"encoding/json"
 	"flag"
 	"fmt"
+	"log/slog"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/httplog/v3"
 )
 
-// This code is the main function of a Go program
-// that creates and starts a server using the Echo framework.
-// It retrieves the value of the "SERVICE_PORT" environment variable
-// and if it is not set, it defaults to port 8000.
 func main() {
+	// Setup structured logging
+	slog.SetDefault(slog.New(slog.NewTextHandler(os.Stdout, nil)))
+
 	// Parse command-line flags
 	healthcheckURL := flag.String("healthcheck", "", "Perform a health check against the given URL and exit")
 	flag.Parse()
@@ -30,49 +36,83 @@ func main() {
 		os.Exit(0)
 	}
 
-	// Create a new Echo instance.
-	e := makeServer()
-
-	// Get the value of the "SERVICE_PORT" environment variable.
-	httpPort := os.Getenv("SERVICE_PORT")
-	if httpPort == "" {
-		httpPort = "8000"
+	// Get port from environment
+	port := os.Getenv("SERVICE_PORT")
+	if port == "" {
+		port = "8000"
 	}
 
-	// Start the server on the specified port.
-	e.Logger.Fatal(e.Start(":" + httpPort))
+	// Get database DSN from environment
+	dsn := os.Getenv("SERVICE_DSN")
+	if dsn == "" {
+		slog.Error("SERVICE_DSN environment variable is not set")
+	}
+
+	// Create server
+	server := setupServer(":"+port, dsn)
+
+	// Create context that cancels on SIGINT/SIGTERM
+	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
+	defer stop()
+
+	// Graceful shutdown goroutine
+	go func() {
+		// Wait for termination signal
+		<-ctx.Done()
+		slog.Info("Shutdown signal received")
+
+		// Graceful shutdown with timeout
+		shutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+
+		if err := server.Shutdown(shutdownCtx); err != nil {
+			slog.Error("Server shutdown error", "error", err)
+		} else {
+			slog.Info("Server has been shut down")
+		}
+	}()
+
+	// Start server
+	slog.Info("Starting server", "port", port)
+	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		slog.Error("Server error", "error", err)
+	}
 }
 
-// makeServer creates a new instance of the Echo framework
-// and configures it with middleware for logging and error recovery.
-// It also defines two route handlers: one for the root ("/") route that returns an HTML response,
-// and another for the "/health" route that returns a JSON response.
-//
-// Returns:
-// - A configured instance of the Echo framework.
-func makeServer() *echo.Echo {
-	// Create a new Echo instance.
-	e := echo.New()
+// setupServer creates a configured HTTP server with Chi router.
+func setupServer(addr, dsn string) *http.Server {
+	r := chi.NewRouter()
 
-	// Use middleware for logging and error recovery.
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
+	r.Use(middleware.RequestID)
+	r.Use(httplog.RequestLogger(slog.Default(), &httplog.Options{}))
+	r.Use(middleware.Recoverer)
+	r.Use(middleware.Heartbeat("/health"))
 
-	// Define the "/" route handler.
-	e.GET("/", handleRoot)
+	r.Get("/test", handleDatabaseTest(dsn))
 
-	// Define the "/health" route handler.
-	e.GET("/health", handleHealth)
-
-	return e
+	return &http.Server{
+		Addr:         addr,
+		Handler:      r,
+		ReadTimeout:  15 * time.Second,
+		WriteTimeout: 15 * time.Second,
+		IdleTimeout:  60 * time.Second,
+	}
 }
 
-// handleRoot handles the "/" route and returns an HTML response.
-func handleRoot(c echo.Context) error {
-	return c.HTML(http.StatusOK, "Hello, World!\n")
-}
+// handleDatabaseTest creates a handler that returns database information as JSON.
+func handleDatabaseTest(dsn string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		dbInfo, err := getDatabaseInfo(r.Context(), dsn)
+		if err != nil {
+			slog.Error("Failed to get database info", "error", err)
+			http.Error(w, "Internal server error", http.StatusInternalServerError)
+			return
+		}
 
-// handleHealth handles the "/health" route and returns a JSON response.
-func handleHealth(c echo.Context) error {
-	return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK"})
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		if err := json.NewEncoder(w).Encode(dbInfo); err != nil {
+			slog.Error("Failed to write JSON response", "error", err)
+		}
+	}
 }
